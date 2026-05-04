@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Typing Rush</title>
+  <link rel="stylesheet" href="game.css">
+  <link rel="stylesheet" href="logout.css">
+  <script>
+    // Check if the page was loaded from the back/forward cache (BFCache)
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            console.log("Page loaded from cache. Forcing reload.");
+            // This forces the browser to fully re-execute the page and its scripts.
+            window.location.reload(); 
+        }
+    });
+  </script>
+  <script src="authCheck.js"></script>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="menu-button">⋮</div>
+    <div class="menu-dropdown">
+      <a href="#" id="keypointsBtn">Game Keypoints</a>
+      <a id="logoutBtn">Logout</a>
+    </div>
+  </div>
+  <!-- Modal -->
+<div class="modal" id="keypointsModal">
+  <div class="modal-content">
+    <h2>Game Keypoints</h2>
+    <ul>
+      <li>⚡ Type as fast as you can</li>
+      <li>🔥 Accuracy = Extra points</li>
+      <li>🏆 Beat the timer to win</li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+<button id="menu-button">⏸️ PAUSE</button>
+<h1 id="game-title">Typing Rush</h1> <!-- will update to Easy/Medium/Hard -->
+  <div id="hud">
+    <span id="score">Score: 0</span>
+    <span id="streak">Streak: 0</span>
+    <span id="lives">❤️❤️❤️</span>
+  </div>
+
+  <div id="game-area"></div>
+
+  <input type="text" id="typed-word" placeholder="Type the word here..." autofocus />
+  <div id="pause-modal">
+    <div class="modal-content">
+        <h2>Game Paused</h2>
+        <button id="resume-btn">Resume Game (ESC)</button>
+        <button id="quit-to-levels-btn">Quit to Level Select</button>
+    </div>
+</div>
+  <div id="game-over" class="hidden">
+    <h2>Game Over!</h2>
+    <p>Final Score: <span id="final-score"></span></p>
+    <button id="play-again">Play Again</button>
+  </div>
+
+  <!-- 🎵 Audio elements -->
+  <audio id="correct-sound" src="correct.mp3"></audio>
+  <audio id="wrong-sound" src="wrong.mp3"></audio>
+
+  <script src="game.js"></script>
+  <!-- <script src="additional.js"></script> -->
+  <script src="logout.js"></script>
+
+</body>
+</html>

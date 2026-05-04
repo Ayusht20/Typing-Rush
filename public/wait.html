@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TypingRush - Waiting Lobby</title>
+  <!-- <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="logout.css"> -->
+  <link rel="stylesheet" href="wait.css">
+</head>
+<body>
+  <div class="background-letters">
+    <span style="left:10%">A</span>
+    <span style="left:25%">T</span>
+    <span style="left:40%">Y</span>
+    <span style="left:60%">P</span>
+    <span style="left:75%">E</span>
+    <span style="left:90%">X</span>
+</div>
+  <div class="menu-container">
+    <div class="menu-button">⋮</div>
+    <div class="menu-dropdown">
+      <a href="#" id="keypointsBtn">Game Keypoints</a>
+      <a id="logoutBtn">Logout</a>
+      <a href="levels.html">🔙</a>
+    </div>
+  </div>
+  <!-- Modal -->
+<div class="modal" id="keypointsModal">
+  <div class="modal-content">
+    <h2>Game Keypoints</h2>
+    <ul>
+      <li>⚡ Type as fast as you can</li>
+      <li>🔥 Accuracy = Extra points</li>
+      <li>🏆 Beat the timer to win</li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+  <h2>Waiting Lobby</h2>
+  <div id="status">Checking login...</div>
+
+  <label for="levelSelect">Select Mode:</label>
+  <select id="levelSelect">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <h3>Online Players:</h3>
+  <ul id="playersList">
+    <!-- Online users will be populated here -->
+  </ul>
+
+  <!-- Incoming invite box -->
+  <div id="incomingRequest">
+    <span id="incomingText"></span><br>
+    <button id="acceptBtn">Accept</button>
+    <button id="rejectBtn">Reject</button>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="lobby.js"></script>
+  <script src="logout.js"></script>
+</body>
+</html>

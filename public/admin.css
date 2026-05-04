@@ -1,0 +1,385 @@
+/* Color Palette */
+:root {
+    /* Deep Slate (Improved darkness) */
+    --color-darkest-bg: #0f172a; 
+    /* Slate-800 */
+    --color-dark-bg: #1e293b; 
+    /* Slate-700 */
+    --color-medium-bg: #334155; 
+    /* Slate-600 */
+    --color-light-bg: #475569; 
+    /* Near White for main text */
+    --color-text-base: #f1f5f9; 
+    /* Gray for secondary text/labels */
+    --color-text-secondary: #94a3b8; 
+    /* Rose-500 (Vibrant primary color) */
+    --color-primary-red: #f43f5e; 
+    /* Darker Rose for delete button */
+    --color-highlight-red: #e11d48; 
+    /* Emerald Green for primary action */
+    --color-success-green: #22c55e; 
+    /* Mint Green for winners */
+    --color-winner-green: #34d399; 
+    /* Blue for PB scores */
+    --color-info-blue: #3b82f6; 
+    /* Amber for admin tag */
+    --color-warning-yellow: #f59e0b; 
+}
+/* Global Styles and Layout */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-darkest-bg);
+    color: var(--color-text-base);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    transition: background-color 0.3s;
+}
+
+.hidden {
+    display: none !important;
+}
+.tab-content {
+    display: none; 
+}
+.tab-content.active {
+    display: block; 
+}
+
+/* Loading Screen */
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.loading-message {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-primary-red);
+    letter-spacing: 0.1em;
+    position: relative;
+}
+.loading-message::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary-red);
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.main-dashboard-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.content-spacing {
+    padding-top: 25px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 2px solid var(--color-medium-bg);
+    margin-bottom: 30px;
+}
+
+.header-title {
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    color: var(--color-primary-red);
+    letter-spacing: -0.05em;
+    text-shadow: 0 0 5px rgba(244, 63, 94, 0.2);
+}
+
+/* Buttons */
+.button {
+    padding: 0.7rem 1.4rem;
+    border-radius: 0.5rem;
+    font-size: 1rem; 
+    transition: all 150ms ease;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-base);
+    font-weight: 600;
+}
+.button-logout {
+    background-color: var(--color-medium-bg);
+    border: 1px solid var(--color-light-bg);
+}
+.button-logout:hover {
+    background-color: var(--color-light-bg);
+    color: var(--color-text-base);
+}
+.button-primary {
+    background-color: var(--color-success-green);
+    color: var(--color-darkest-bg);
+    font-weight: 700;
+}
+.button-primary:hover {
+    background-color: #15803d;
+    transform: translateY(-1px);
+}
+
+/* Main Tabs (Navigation) */
+.tabs-container {
+    display: flex;
+    border-bottom: 2px solid var(--color-medium-bg);
+    margin-bottom: 25px;
+}
+
+.tab-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.tab-button:hover:not(.active) {
+    color: var(--color-text-base);
+}
+
+.tab-button.active {
+    color: var(--color-primary-red);
+    border-bottom: 4px solid var(--color-primary-red);
+    margin-bottom: -2px; 
+}
+
+/* Cards and Filtering */
+.card {
+    background-color: var(--color-dark-bg);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.tab-heading {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-text-base);
+    margin-bottom: 20px;
+}
+
+.filter-card {
+    margin-bottom: 30px;
+    background-color: #1e3a5f;
+    border: 1px solid #3b82f640;
+}
+
+.filter-title {
+    font-size: 1.25rem;
+    color: var(--color-text-base);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-medium-bg);
+    padding-bottom: 10px;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 30px;
+    align-items: flex-end;
+}
+
+.input-group {
+    flex: 1;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-medium-bg);
+    border-radius: 0.5rem;
+    color: var(--color-text-base);
+    border: 2px solid transparent;
+    transition: border-color 200ms, box-shadow 200ms;
+}
+
+.input-group input:focus {
+    border-color: var(--color-primary-red);
+    box-shadow: 0 0 5px rgba(244, 63, 94, 0.5);
+    outline: none;
+}
+
+/* Sub-Tabs (Report Switches) */
+.subtabs-container {
+    display: flex;
+    gap: 0px;
+    border-bottom: 1px solid var(--color-medium-bg);
+    margin-bottom: 0px;
+}
+
+.subtab-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: all 150ms ease;
+}
+
+.subtab-button:hover:not(.active) {
+    background-color: #273444;
+    color: var(--color-text-base);
+}
+
+.subtab-button.active {
+    background-color: var(--color-dark-bg);
+    color: var(--color-primary-red);
+    border: 1px solid var(--color-medium-bg);
+    border-bottom: 1px solid var(--color-dark-bg);
+    transform: translateY(1px);
+}
+
+.report-view {
+    margin-top: -1px;
+}
+.report-title {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+}
+
+/* Data Table (User List and Reports) */
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.data-table thead th {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-base);
+    background-color: var(--color-medium-bg);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+}
+
+.data-table td {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+    color: var(--color-text-base);
+    font-size: 0.9rem;
+}
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background-color: #2e3b4e;
+}
+
+.table-loading {
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+
+/* Messages & Info */
+.message {
+    padding: 12px 15px;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    margin-top: 15px;
+    border-left: 5px solid;
+}
+
+.message-error {
+    background-color: rgba(220, 38, 38, 0.15);
+    color: var(--color-highlight-red);
+    border-left-color: var(--color-highlight-red);
+}
+
+.message-success {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--color-success-green);
+    border-left-color: var(--color-success-green);
+}
+
+.report-info {
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.action-button-delete {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-highlight-red);
+    border-radius: 0.4rem;
+    font-weight: 700;
+    color: var(--color-text-base);
+    cursor: pointer;
+    border: none;
+    transition: all 150ms ease;
+}
+
+.action-button-delete:hover {
+    background-color: #9f1239;
+    box-shadow: 0 2px 5px rgba(225, 29, 72, 0.5);
+    transform: translateY(-1px);
+}
+
+.admin-tag {
+    color: var(--color-warning-yellow);
+    background-color: rgba(245, 158, 11, 0.15);
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.3rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Specific styling for report cells */
+.data-table .winner-cell {
+    color: var(--color-winner-green);
+    font-weight: 700;
+}
+.data-table .player-details-cell {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+.data-table .pb-score-cell {
+    color: var(--color-info-blue);
+    font-weight: 700;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingRush - Leaderboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="leaderboard.css">
+</head>
+<body class="selection:bg-cyan-500 selection:text-white">
+
+    <div class="fixed top-4 left-4 z-10">
+        <button onclick="window.location.href='index.html'" 
+                class="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 back-btn">
+            <span role="img" aria-label="home">🏠</span> 
+            <span class="hidden sm:inline">Back to Dashboard</span>
+        </button>
+    </div>
+
+    <h1 class="brand mt-16 sm:mt-10 relative z-10">TypingRush</h1>
+
+    <div class="glass-card w-full max-w-4xl p-6 sm:p-8 space-y-6 text-white text-center relative z-10">
+        <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mb-6">
+            
+            <select id="gameTypeFilter" class="bg-indigo-700/50 p-2 rounded-lg font-semibold border-2 border-indigo-500/50" onchange="loadLeaderboard()">
+                <option value="single">Single Player (PB)</option>
+                <option value="multi">Multiplayer (PB)</option>
+                <option value="history">Match History (Duels)</option>
+            </select>
+            
+            <select id="levelFilter" class="bg-indigo-700/50 p-2 rounded-lg font-semibold border-2 border-indigo-500/50" onchange="loadLeaderboard()">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            
+            <select id="orderByFilter" class="bg-indigo-700/50 p-2 rounded-lg font-semibold border-2 border-indigo-500/50" onchange="loadLeaderboard()">
+                <option value="score">Score</option>
+                <option value="highest_wpm">WPM</option>
+                <option value="highest_streak">Streak</option>
+            </select>
+        </div>
+
+        <h2 id="leaderboardTitle" class="text-xl sm:text-2xl font-extrabold text-cyan-300">
+            Global Leaderboard
+        </h2>
+        
+        <div class="overflow-x-auto rounded-lg">
+            <table id="leaderboardTable" class="min-w-full divide-y divide-gray-600 shadow-xl">
+                <thead class="bg-indigo-700/70 border-b border-gray-500">
+                    <tr>
+                        <th scope="col" class="py-3 px-3 text-xs sm:text-sm font-medium tracking-wider text-left uppercase text-gray-200 w-1/12">Rank</th>
+                        <th scope="col" class="py-3 px-3 text-xs sm:text-sm font-medium tracking-wider text-left uppercase text-gray-200 w-3/12">Player</th>
+                        <th id="metricHeader" scope="col" class="py-3 px-3 text-xs sm:text-sm font-medium tracking-wider text-left uppercase text-gray-200 w-2/12">Score</th>
+                        <th id="detailHeader" scope="col" class="py-3 px-3 text-xs sm:text-sm font-medium tracking-wider text-left uppercase text-gray-200 w-6/12">Details</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700" id="leaderboardBody">
+                    </tbody>
+            </table>
+        </div>
+        <p id="loadingMessage" class="text-gray-400">Loading data...</p>
+    </div>
+
+    <script src="leaderboard.js"></script>
+</body>
+</html>

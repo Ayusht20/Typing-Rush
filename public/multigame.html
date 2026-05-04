@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TypingRush - Multiplayer</title>
+    <link rel="stylesheet" href="multigame.css">
+    <link rel="stylesheet" href="logout.css">
+    <script>
+        // Check if the page was loaded from the back/forward cache (BFCache)
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                console.log("Page loaded from cache. Forcing reload.");
+                // This forces the browser to fully re-execute the page and its scripts.
+                window.location.reload(); 
+            }
+        });
+      </script>
+      <script src="authCheck.js"></script>
+</head>
+<body>
+    <h1 id="game-title">Typing Rush - Multiplayer</h1>
+    <div class="menu-container">
+        <div class="menu-button">⋮</div>
+        <div class="menu-dropdown">
+          <a href="#" id="keypointsBtn">Game Keypoints</a>
+          <a id="logoutBtn">Logout</a>
+          <a href="levels.html">🔙</a>
+        </div>
+      </div>
+      <!-- Modal -->
+    <div class="modal" id="keypointsModal">
+      <div class="modal-content">
+        <h2>Game Keypoints</h2>
+        <ul>
+          <li>⚡ Type as fast as you can</li>
+          <li>🔥 Accuracy = Extra points</li>
+          <li>🏆 Beat the timer to win</li>
+        </ul>
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+    <div id="hud">
+        <div class="hud-item">Score: <span id="myScoreDisplay">0</span></div>
+        <div class="hud-item">Streak: <span id="streakDisplay">0</span></div>
+        <div class="hud-item" > <span id="myLivesDisplay">❤️❤️❤️</span>
+        </div>
+        <div id="timer-container" class="hud-item">
+            <p id="timeTxt">Time left: <span id="timeLeftDisplay">60</span>s</p>
+        </div>
+    </div>
+
+    <div id="info">
+        <div class="player-info-card" id="player1">
+            <p><span id="player1Name">You</span></p>
+            <p>Score: <span id="player1ScoreDisplay">0</span></p>
+            <p>WPM: <span id="player1WpmDisplay">0</span></p>
+            <p>Lives: <span id="player1LivesDisplay">❤️❤️❤️</span></p>
+        </div>
+        <div class="player-info-card" id="player2">
+            <p><span id="player2Name">Opponent</span></p>
+            <p>Score: <span id="player2ScoreDisplay">0</span></p>
+            <p>WPM: <span id="player2WpmDisplay">0</span></p>
+            <p>Lives: <span id="player2LivesDisplay">❤️❤️❤️</span></p>
+        </div>
+    </div>
+
+<div id="game-area"></div>
+    <input id="typed-word" placeholder="Type here..." autofocus />
+
+
+
+    <div id="game-over" class="hidden">
+        <h2>Match Over</h2>
+        <p id="matchResultText"></p>
+        <a href="wait.html">Back to Lobby</a>
+    </div>
+
+    <audio id="correctSound" src="correct.mp3"></audio>
+    <audio id="wrongSound" src="wrong.mp3"></audio>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="multigame.js"></script>
+    <script src="logout.js"></script>
+</body>
+</html>

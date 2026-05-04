@@ -1,0 +1,352 @@
+/* ------------------------------------------- */
+/* GLOBAL & BACKGROUND */
+/* ------------------------------------------- */
+.dashboard-bg {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #09171d, #1a2e37, #244250); 
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  perspective: 1000px; /* Enable subtle 3D effects across the page */
+}
+
+/* Background Letters (Falling Effect) */
+.background-letters {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Lowest content layer */
+  overflow: hidden;
+}
+
+.background-letters span {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: bold;
+  transform: translateY(-100px) translateZ(-50px); /* Pushed back in Z-space */
+  animation: fall 8s linear infinite; 
+}
+
+/* Falling + slight horizontal float with minimal opacity change */
+@keyframes fall {
+  0% {
+      transform: translateY(-100px) translateX(0px) scale(1) translateZ(-50px); 
+      opacity: 1; 
+  }
+  100% {
+      transform: translateY(100vh) translateX(0px) scale(1) translateZ(-50px);
+      opacity: 0.9;
+  }
+}
+
+/* Neon colors + glow */
+.background-letters span:nth-child(1) { color: #ff3b3b; text-shadow: 0 0 10px #ff3b3b, 0 0 20px #ff0000; }
+.background-letters span:nth-child(2) { color: #3bffec; text-shadow: 0 0 10px #3bffec, 0 0 20px #00ffee; }
+.background-letters span:nth-child(3) { color: #ffea3b; text-shadow: 0 0 10px #ffea3b, 0 0 20px #ffd700; }
+.background-letters span:nth-child(4) { color: #8c3bff; text-shadow: 0 0 10px #8c3bff, 0 0 20px #6a00ff; }
+.background-letters span:nth-child(5) { color: #3bff63; text-shadow: 0 0 10px #3bff63, 0 0 20px #00ff55; }
+.background-letters span:nth-child(6) { color: #ff6b3b; text-shadow: 0 0 10px #ff6b3b, 0 0 20px #ff3300; }
+
+
+/* ------------------------------------------- */
+/* NAVBAR */
+/* ------------------------------------------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(0,0,0,0.8); /* Stronger background for contrast */
+  backdrop-filter: blur(15px); 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700; 
+  color: #00b4d8;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, text-shadow 0.3s;
+  padding: 0.25rem 0; /* Added padding for a larger click area */
+}
+
+.navbar ul li a:hover {
+  color: #90e0ef; /* Lighter shade on hover */
+  text-shadow: 0 0 10px #00b4d8;
+}
+
+
+/* ------------------------------------------- */
+/* HERO SECTION */
+/* ------------------------------------------- */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  text-align: center;
+  position: relative; 
+  z-index: 10;
+}
+
+.hero-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  padding: 3rem 4rem; 
+  border-radius: 20px; 
+  max-width: 700px; 
+  box-shadow: 
+      0 0 35px rgba(0, 180, 216, 0.4), 
+      0 15px 50px rgba(0,0,0,0.8);
+  border: 1px solid rgba(0, 180, 216, 0.6); 
+  transition: transform 0.5s ease;
+}
+
+.hero-card:hover {
+  transform: perspective(1000px) rotateY(1deg) scale(1.01); 
+}
+
+/* Typing Animation for Hero Title */
+.typing-animation {
+  font-size: 3rem; 
+  font-weight: 900; 
+  color: white;
+  border-right: 4px solid cyan; 
+  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0 auto 1.5rem; 
+  animation: typing 3s steps(20, end) forwards, blink .6s step-end infinite; 
+  text-shadow: 0 0 8px cyan; 
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: cyan; }
+}
+
+.cta-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 3rem; 
+  background: #00b4d8;
+  color: #0f2027; 
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  transform: translateZ(10px); 
+}
+
+.cta-btn:hover {
+  background: #90e0ef;
+  box-shadow: 0 0 25px #00b4d8, 0 6px 20px rgba(0,0,0,0.6); 
+  transform: translateZ(15px) translateY(-2px); 
+}
+
+
+/* ------------------------------------------- */
+/* IMAGE GRID */
+/* ------------------------------------------- */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 2rem; 
+  padding: 4rem 3rem; 
+  position: relative;
+  z-index: 10;
+}
+
+.grid-item {
+  overflow: hidden;
+  border-radius: 16px; 
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
+  transition: transform 0.4s ease, box-shadow 0.4s ease; 
+  transform-style: preserve-3d; 
+}
+
+.grid-item:hover {
+  box-shadow: 0 0 30px #00b4d8; 
+  transform: scale(1.02) translateY(-5px) translateZ(10px); 
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; 
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+
+.grid-item img:hover {
+  transform: scale(1.15); 
+}
+
+
+/* ------------------------------------------- */
+/* LEADERBOARD PREVIEW */
+/* ------------------------------------------- */
+.leaderboard-preview {
+  text-align: center;
+  padding: 3rem; 
+  background: rgba(255,255,255,0.05);
+  margin: 3rem; 
+  border-radius: 16px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+}
+
+.leaderboard-preview h2 {
+  color: #90e0ef;
+  font-size: 2.2rem; 
+  margin-bottom: 1.5rem;
+}
+
+.leaderboard-preview ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+}
+
+.leaderboard-preview li {
+  margin: 0.8rem 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2); 
+  padding-bottom: 0.5rem;
+}
+.leaderboard-preview li:first-child {
+  font-weight: 700; 
+  color: #ffd700; 
+  text-shadow: 0 0 8px #ffd700;
+}
+.leaderboard-preview li:last-child {
+  border-bottom: none;
+}
+
+.view-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  background: #00b4d8;
+  color: #0f2027;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.view-btn:hover {
+  background: #90e0ef;
+  box-shadow: 0 0 15px #00b4d8;
+  transform: translateY(-1px);
+}
+
+
+/* ------------------------------------------- */
+/* RESPONSIVENESS (Media Queries) */
+/* ------------------------------------------- */
+@media (max-width: 768px) {
+  /* Navbar Adjustment */
+  .navbar {
+      flex-direction: column;
+      padding: 1rem;
+  }
+  .navbar ul {
+      margin-top: 1rem;
+      gap: 1rem;
+  }
+  
+  /* Hero Card Scaling */
+  .hero {
+      height: 55vh;
+  }
+  .hero-card {
+      padding: 2rem 1.5rem;
+  }
+  
+  /* Typing Animation for Mobile */
+  .typing-animation {
+      font-size: 2rem;
+      animation: none;
+      border-right: none;
+  }
+  
+  /* Image Grid Scaling */
+  .image-grid {
+      grid-template-columns: 1fr; 
+      padding: 2rem 1rem;
+  }
+  
+  .leaderboard-preview {
+      margin: 2rem 1rem;
+  }
+}
+/* ------------------------------------------- */
+/* MUSIC TOGGLE BUTTON (New Element) */
+/* ------------------------------------------- */
+.music-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #00b4d8;
+  color: #0f2027;
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 2000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.5);
+  user-select: none;
+}
+
+.music-toggle:hover {
+  background: #90e0ef;
+  transform: scale(1.05);
+}
+
+.music-toggle.paused {
+  background: #ff3b3b;
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 59, 59, 0.5);
+}
+
+/* Add mobile style to the media query at the bottom of your CSS: */
+@media (max-width: 768px) {
+  /* ... existing styles ... */
+  
+  .music-toggle {
+      bottom: 15px;
+      right: 15px;
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+  }
+}

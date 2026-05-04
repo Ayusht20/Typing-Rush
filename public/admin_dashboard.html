@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingRush Admin Panel</title>
+    <link rel="stylesheet" href="admin.css"> 
+</head>
+<body>
+
+    <div id="loadingScreen" class="loading-screen">
+        <h2 class="loading-message">Loading Admin Dashboard...</h2>
+    </div>
+
+    <div id="mainDashboard" class="main-dashboard-layout hidden">
+        <header class="header">
+            <h1 class="header-title">Admin Dashboard</h1>
+            <button id="adminLogoutBtn" class="button button-logout">Logout</button>
+        </header>
+
+        <div class="tabs-container">
+            <button onclick="showTab('users', this)" class="tab-button active" id="users-tab">User Management (Deletion)</button>
+            <button onclick="showTab('audit', this)" class="tab-button" id="reports-tab">Match History & Reports</button>
+        </div>
+
+        <div id="users" class="tab-content active content-spacing">
+            <h2 class="tab-heading">Registered Users (Account Deletion)</h2>
+            <p id="userMessage" class="message message-error message-margin hidden"></p>
+            <div class="card table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">ID</th>
+                            <th style="width: 35%;">Username</th>
+                            <!-- <th style="width: 35%;">Created</th> -->
+                            <th style="width: 20%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList">
+                        <tr><td colspan="4" class="table-loading">Loading users...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="audit" class="tab-content content-spacing">
+            <h2 class="tab-heading">Detailed Game Reports</h2>
+            
+            <div class="card filter-card">
+                <h3 class="filter-title">Filter Match Data</h3>
+                <div class="filter-controls">
+                    <div class="input-group">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div class="input-group">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <button onclick="loadReportData(currentReportType, true)" class="button button-primary">
+                        Apply Filter
+                    </button>
+                </div>
+            </div>
+            
+            <div class="subtabs-container">
+                <button onclick="switchReport('matches', this)" class="subtab-button active" id="matches-report-btn">
+                    Multiplayer Match Logs
+                </button>
+                <button onclick="switchReport('pbs', this)" class="subtab-button" id="pbs-report-btn">
+                    Single Player Match Logs
+                </button>
+            </div>
+            
+            <div class="card report-view">
+                <h3 id="reportTitle" class="report-title">Multiplayer Match Logs (All Time - Max 500 Records)</h3>
+                <p id="matchReportMessage" class="message message-error hidden"></p>
+                <div class="table-container">
+                    <table class="data-table" id="matchLogTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;">Date</th>
+                                <th style="width: 10%;">Time</th>
+                                <th style="width: 10%;">Level</th>
+                                <th style="width: 15%;">Winner</th>
+                                <th style="width: 55%;">Players (Score / WPM)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matchReportList">
+                            <tr><td colspan="5" class="table-loading">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                    
+                    <table class="data-table hidden" id="pbSubmissionsTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">Date Submitted</th>
+                                <th style="width: 30%;">Username</th>
+                                <th style="width: 20%;">Level</th>
+                                <th style="width: 30%;">Score / WPM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pbReportList">
+                            <tr><td colspan="4" class="table-loading">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="report-info">Review the game history for activity trends and potential cheating.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script> 
+</body>
+</html>

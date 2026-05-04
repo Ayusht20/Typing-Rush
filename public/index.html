@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Rush - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script>
+        (function() {
+  // 1. Check if the authentication token exists in session storage.
+  const token = sessionStorage.getItem("tr_token");
+  
+  // 2. If the token is missing, the user is unauthorized.
+  if (token) {
+    console.log("SECURITY ALERT: Token missing. Unauthorized access attempt detected.");
+    
+    // Ensure all client-side session data is wiped clean before redirecting
+    // window.location.reload(); 
+    sessionStorage.removeItem("tr_user");
+      sessionStorage.removeItem("tr_token");
+
+      // 3. Immediately redirect the user to the login page.
+      // Using replace() is essential to prevent the secure page from being in the browser's history.
+      window.location.replace("login.html");
+      
+      // Stop all further script execution on the secured page.
+      return; 
+  }
+  
+  // If the token exists, access is granted.
+  console.log("Authentication successful. Access granted to secure page.");
+})();
+        // --- MUSIC CONTROLS START ---
+        window.onload = function() {
+            const audio = document.getElementById('bg-audio');
+            if (audio) {
+                audio.volume = 0.3; // Set volume low
+                audio.loop = true;
+                // Attempt to play muted. The user will unmute/control with the button.
+                audio.play().catch(e => console.log("Autoplay blocked. User interaction needed."));
+            }
+             
+            // Call the function to load leaderboard data on window load
+            loadLeaderboardPreview(); 
+        };
+
+        function toggleMusic() {
+            const audio = document.getElementById('bg-audio');
+            const toggle = document.querySelector('.music-toggle');
+            if (audio.paused) {
+                audio.muted = false; // Unmute before playing
+                audio.play();
+                toggle.textContent = '🎶 Music On';
+                toggle.classList.remove('paused');
+            } else {
+                audio.pause();
+                toggle.textContent = '🔇 Music Off';
+                toggle.classList.add('paused');
+            }
+        }
+        // --- MUSIC CONTROLS END ---
+        
+        /**
+         * Fetches and displays the top 3 high scores for the default leaderboard settings.
+         */
+        async function loadLeaderboardPreview() {
+            const leaderboardList = document.getElementById('topPlayersList');
+            leaderboardList.innerHTML = '<li>Loading top scores...</li>'; // Set loading message
+
+            // Default settings for dashboard preview: Single Player, Easy, sorted by Score
+            const url = `http://localhost:3000/get_leaderboard?type=single&level=easy&orderBy=score`;
+
+            try {
+                // Since the server endpoint is now public, we don't need an Authorization header.
+                const response = await fetch(url, { method: 'GET' });
+                const result = await response.json();
+
+                if (response.ok && result.leaderboard) {
+                    const topPlayers = result.leaderboard.slice(0, 3);
+                    leaderboardList.innerHTML = ''; // Clear loading message
+
+                    if (topPlayers.length === 0) {
+                        leaderboardList.innerHTML = '<li>Be the first to post a score!</li>';
+                        return;
+                    }
+
+                    topPlayers.forEach((player, index) => {
+                        const listItem = document.createElement('li');
+                        // Use the username and the primary metric (score) or WPM for display
+                        const metric = player.score.toLocaleString() !== '0' ? `${player.score.toLocaleString()} Score` : `${player.highest_wpm} WPM`;
+                        listItem.textContent = `${index + 1}. ${player.username} - ${metric}`;
+                        leaderboardList.appendChild(listItem);
+                    });
+
+                } else {
+                    console.error("API Error:", result.error || "Failed to fetch leaderboard preview.");
+                    leaderboardList.innerHTML = '<li>Error loading scores.</li>';
+                }
+            } catch (e) {
+                console.error("Network Fetch Error:", e);
+                leaderboardList.innerHTML = '<li>Network error. Server offline?</li>';
+            }
+        }
+    </script>
+
+</head>
+<body class="dashboard-bg">
+    
+    <audio id="bg-audio" src="bg_music.mp3" preload="auto" muted></audio>
+
+    <div class="background-letters">
+        <span style="left:10%">A</span>
+        <span style="left:25%; animation-delay: 2s;">T</span>
+        <span style="left:40%; animation-delay: 4s;">Y</span>
+        <span style="left:60%; animation-delay: 6s;">P</span>
+        <span style="left:75%; animation-delay: 8s;">E</span>
+        <span style="left:90%; animation-delay: 10s;">X</span>
+    </div>
+
+    <nav class="navbar">
+        <h1 class="logo">Typing Rush</h1>
+        <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+    </nav>
+    
+    <div class="music-toggle" onclick="toggleMusic()">🎵 Music On</div>
+
+    <section class="hero">
+        <div class="hero-card">
+           <h1 class="typing-animation">Welcome to Typing Rush</h1>
+            <h4>Test your speed. Challenge your friends. Become the ultimate typing champion!</h4>
+            <a href="login.html" class="cta-btn">Get Started</a>
+        </div>
+    </section>
+
+    <section class="image-grid">
+        <div class="grid-item"><img src="images/main.png" alt="Game Screenshot"></div>
+        <div class="grid-item"><img src="images/typing-hand.png" alt="Hand on Keyboard"></div>
+        <div class="grid-item"><img src="images/multiplayer.png" alt="Multiplayer Race"></div>
+    </section>
+
+    <section class="leaderboard-preview">
+        <h2>🏆 Top Players (Easy Mode)</h2>
+        <ul id="topPlayersList">
+            </ul>
+        <a href="leaderboard.html" class="view-btn">View Full Leaderboard</a>
+    </section>
+
+</body>
+</html>

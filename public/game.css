@@ -1,0 +1,593 @@
+/* ============================= */
+/* Layout & Brand                */
+/* ============================= */
+:root {
+    --panel-w: 1200px;
+    --panel-h: 560px;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    padding-top: 6rem;
+    overflow-x: hidden;
+  }
+  
+  /* ============================= */
+  /* Brand                         */
+  /* ============================= */
+  h1.brand {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-weight: 900;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    color: #ffe8b6;
+    text-shadow: 0 3px 12px rgba(0,0,0,.4);
+    z-index: 1000;
+  }
+  
+  /* ============================= */
+  /* HUD                           */
+  /* ============================= */
+  #hud {
+    max-width: var(--panel-w);
+    margin: 0.5rem auto 0.8rem;
+    padding: 0 .75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: .5rem;
+    align-items: center;
+    font-weight: 700;
+  }
+  
+  /* #lives { text-align: left; color: #ff4d6d; font-size: 1.3rem; }
+  #score, #streak { text-align: right; }
+  #level {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffe066;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  }
+   */
+   /* HUD Styling */
+  /* === HUD Styling (Polished Pro Gamer Look) === */
+  #lives, 
+  #score, 
+  #streak {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin: 0 8px; /* <<< added spacing between them */
+    /* margin-left: 8rem; */
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.5),
+                inset 0 0 6px rgba(0, 255, 255, 0.2);
+    transition: transform 0.15s ease, color 0.15s ease;
+    display: inline-block; /* keeps neat alignment */
+  }
+  
+  /* Score → cool cyan */
+  #score {
+    color: #00eaff;
+    text-shadow: 0 0 6px rgba(0, 234, 255, 0.8),
+                 0 0 14px rgba(0, 234, 255, 0.5);
+  }
+  
+  /* Streak → fiery orange */
+  #streak {
+    color: #ff9500;
+    text-shadow: 0 0 6px rgba(255, 149, 0, 0.8),
+                 0 0 14px rgba(255, 149, 0, 0.5);
+  }
+  
+  /* Lives → danger red */
+  #lives {
+    color: #ff2e63;
+    text-shadow: 0 0 6px rgba(255, 46, 99, 0.8),
+                 0 0 14px rgba(255, 46, 99, 0.5);
+  }
+  
+  /* === Animations === */
+  #lives, #score, #streak {
+    animation: hudBreath 2s ease-in-out infinite;
+  }
+  
+  @keyframes hudBreath {
+    0%, 100% { transform: scale(1); opacity: 0.95; }
+    50%      { transform: scale(1.04); opacity: 1; }
+  }
+  
+  /* On update (pop effect) */
+  .hud-pop {
+    animation: hudPop 0.35s ease;
+  }
+  
+  @keyframes hudPop {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.18); }
+    60%  { transform: scale(0.92); }
+    100% { transform: scale(1); }
+  }
+  
+  /* ============================= */
+  /* Game Area                     */
+  /* ============================= */
+  /* #game-area {
+    position: relative;
+    width: min(96%, var(--panel-w));
+    height: var(--panel-h);
+    margin: 0.5rem auto 1rem;
+    border: 4px solid #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.25);
+    box-shadow: 0 10px 35px rgba(0,0,0,.3) inset;
+  } */
+  /* === Game Area (single, working) === */
+  #game-area {
+    position: relative;
+    width: min(96%, var(--panel-w));
+    height: var(--panel-h);
+    margin: 0.5rem auto 1rem;
+    border: 4px solid rgba(255,255,255,0.7);
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.25);
+    animation: bgPulse 8s ease-in-out infinite, huePulse 12s linear infinite;
+    will-change: filter, box-shadow;
+  }
+  
+  /* Subtle neon breathing */
+  @keyframes bgPulse {
+    0%,100% { box-shadow: 0 10px 35px rgba(0,0,0,.35) inset, 0 0 20px rgba(0,255,255,.18); }
+    50%     { box-shadow: 0 10px 35px rgba(0,0,0,.35) inset, 0 0 44px rgba(0,255,255,.36); }
+  }
+  @keyframes huePulse {
+    0%   { filter: hue-rotate(0deg) brightness(1); }
+    50%  { filter: hue-rotate(18deg) brightness(1.08); }
+    100% { filter: hue-rotate(0deg) brightness(1); }
+  }
+  
+  /* Floating “particles” — no external image */
+  #game-area::before,
+  #game-area::after{
+    content:"";
+    position:absolute; inset:-35%;
+    background-image:
+      radial-gradient(rgba(255,255,255,.07) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+    opacity:.06;
+    animation: drift 60s linear infinite;
+    pointer-events:none;
+  }
+  #game-area::after{
+    background-size: 28px 28px;
+    opacity:.035;
+    animation-duration: 90s;
+  }
+  @keyframes drift{
+    0%   { transform: translate(0,0) rotate(0deg); }
+    100% { transform: translate(25%,25%) rotate(360deg); }
+  }
+  
+  /* Reactive flashes + shake + ripple */
+  #game-area.flash-life   { animation: flashRed .45s ease; }
+  #game-area.flash-streak { animation: flashGold .6s ease; }
+  #game-area.shake        { animation: screenShake .45s cubic-bezier(.36,.07,.19,.97); }
+  #game-area.ripple::after{
+    content:"";
+    position:absolute; top:50%; left:50%;
+    width:18px; height:18px; border-radius:50%;
+    background: rgba(255,215,0,.55);
+    transform: translate(-50%,-50%) scale(0);
+    animation: rippleBurst .8s ease-out forwards;
+    pointer-events:none;
+  }
+  
+  @keyframes flashRed   { 0%{background:radial-gradient(circle,#29080b,#03131c)} 50%{background:radial-gradient(circle,#ff2a2a,#03131c)} 100%{background:radial-gradient(circle,#29080b,#03131c)} }
+  @keyframes flashGold  { 0%{background:radial-gradient(circle,#2b2100,#03131c)} 50%{background:radial-gradient(circle,#ffd700,#03131c)} 100%{background:radial-gradient(circle,#2b2100,#03131c)} }
+  @keyframes screenShake{
+    10%,90%{ transform: translate3d(-2px,0,0); }
+    20%,80%{ transform: translate3d( 4px,0,0); }
+    30%,50%,70%{ transform: translate3d(-6px,0,0); }
+    40%,60%{ transform: translate3d( 6px,0,0); }
+  }
+  @keyframes rippleBurst{
+    to { transform: translate(-50%,-50%) scale(12); opacity:0; }
+  }
+  
+  /* ============================= */
+  /* Falling Words                 */
+  /* ============================= */
+  .word {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #fff;
+    background: rgba(0,0,0,0.55);
+    padding: 6px 12px;
+    border-radius: 10px;
+    user-select: none;
+    white-space: nowrap;
+    line-height: 1.4;
+    transform: translateZ(0);
+    transition: top linear, left linear, transform 0.3s ease;
+    text-shadow: 0 2px 6px rgba(0,0,0,.6);
+    animation: subtleFloat 3s ease-in-out infinite alternate;
+  }
+  
+  .word.safe-x {
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+  
+  /* Word Float Animation */
+  @keyframes subtleFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
+    100% { transform: translateY(0) rotate(-2deg); }
+  }
+  
+  /* Correct word */
+  .word.correct {
+    animation: correctBurst 0.9s ease-out forwards, glowPulse 0.8s ease-out;
+  }
+  @keyframes correctBurst {
+    0% { transform: scale(1) rotate(0); opacity: 1; }
+    30% { transform: scale(1.5) rotate(-8deg); background: #07c98b; box-shadow: 0 0 20px #07c98b, 0 0 40px #00ffcc; }
+    60% { transform: scale(1.2) rotate(5deg); background: #06d6a0; box-shadow: 0 0 25px #00ffcc; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  @keyframes glowPulse {
+    0% { text-shadow: 0 0 8px #00ffcc, 0 0 15px #07c98b; }
+    100% { text-shadow: none; }
+  }
+  
+  /* Wrong word */
+  /* .word.wrong {
+    animation: wrongShake 0.6s cubic-bezier(.36,.07,.19,.97), wrongPulse 0.5s ease;
+  } */
+  /* @keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  } */
+  @keyframes wrongPulse {
+    0%, 100% { background: rgba(0,0,0,0.55); }
+    50% { background: #e63946; color: #fff; box-shadow: 0 0 20px rgba(230,57,70,0.7); }
+  }
+  
+  /* Fallen word */
+  .word.fallen {
+    animation: bounceFall 1s ease forwards;
+    color: #ff4d6d;
+    font-weight: bold;
+  }
+  @keyframes bounceFall {
+    0% { transform: translateY(0); opacity: 1; }
+    60% { transform: translateY(90px) scale(1.05); }
+    80% { transform: translateY(70px) scale(0.95); }
+    100% { transform: translateY(100px) scale(0.7); opacity: 0; }
+  }
+  
+  /* ============================= */
+  /* Input                         */
+  /* ============================= */
+  #typed-word {
+    width: min(94%, 460px);
+    margin: 0 auto 1.2rem;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.15rem;
+    outline: none;
+    color: #003049;
+    background: #caf0f8;
+    box-shadow: 0 6px 18px rgba(0,0,0,.2);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  #typed-word:focus {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  }
+  
+  /* ============================= */
+  /* Game Over Screen              */
+  /* ============================= */
+  #game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(20,20,40,0.97), rgba(5,5,15,0.95));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1000;
+    color: #fff;
+    font-family: "Trebuchet MS", sans-serif;
+    animation: fadeIn 0.9s ease-in-out;
+  }
+  #game-over.hidden { display: none; }
+  
+  #game-over h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #ff4d4d;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 25px rgba(255, 77, 77, 0.9), 0 0 60px rgba(255, 0, 0, 0.7);
+    animation: dropIn 0.8s ease-out, glowRed 2s infinite alternate;
+  }
+  #game-over h2::after {
+    content: "✦ ✦ ✦";
+    display: block;
+    font-size: 1.2rem;
+    color: #ff9999;
+    margin-top: 0.5rem;
+    animation: sparkle 1.5s infinite ease-in-out alternate;
+  }
+  
+  #game-over p {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: #ffe066;
+    text-shadow: 0 0 10px rgba(255, 230, 102, 0.8);
+  }
+  
+  #game-over button {
+    padding: 14px 28px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+  }
+  #game-over button:hover {
+    transform: scale(1.12) rotate(-1deg);
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    box-shadow: 0 10px 30px rgba(255,70,70,0.5);
+  }
+  #game-over button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 25px rgba(255,70,70,0.6), 0 0 50px rgba(255,0,0,0.4);
+  }
+  
+  /* Game Over Glow & Sparkle */
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+  @keyframes dropIn { 0% { transform: translateY(-80px) scale(0.7); opacity: 0; } 70% { transform: translateY(10px) scale(1.1); opacity: 1; } 100% { transform: translateY(0) scale(1); } }
+  @keyframes glowRed { from { text-shadow: 0 0 15px #ff0000, 0 0 30px #ff3333; } to { text-shadow: 0 0 25px #ff4444, 0 0 50px #ff0000; } }
+  @keyframes sparkle { 0% { opacity: 0.2; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.3; transform: scale(1); } }
+  
+  /* ============================= */
+  /* Streak & Reward Popups        */
+  /* ============================= */
+  .streak-popup {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 15px orange, 0 0 30px red;
+    animation: popUp 1.2s ease-out forwards;
+    will-change: transform, opacity;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  @keyframes popUp {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-10deg); }
+    40% { opacity: 1; transform: translate(-50%, -50%) scale(1.5) rotate(5deg); }
+    70% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(-3deg); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  }
+  
+  .reward-message {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 0 0 12px #ffd700, 0 0 25px orange;
+    animation: floatUp 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 999;
+  }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.8); }
+    30% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.1); }
+    70% { opacity: 1; transform: translateX(-50%) translateY(-20px) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-40px) scale(0.9); }
+  }
+  /* ============================= */
+  /* HUD Streak Fire Animation     */
+  /* ============================= */
+  .streak-fire {
+    color: gold;
+    text-shadow: 0 0 12px gold, 0 0 25px orange, 0 0 40px red;
+    animation: streakPulse 1.2s ease-out;
+    will-change: transform, text-shadow, opacity;
+  }
+  
+  @keyframes streakPulse {
+    0% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    30% {
+      transform: scale(1.4) rotate(-4deg);
+      text-shadow: 0 0 20px gold, 0 0 40px orange, 0 0 60px red;
+    }
+    60% {
+      transform: scale(1.2) rotate(3deg);
+      text-shadow: 0 0 15px gold, 0 0 30px orange;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+      text-shadow: 0 0 10px gold;
+    }
+  }
+  .streak-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 4rem;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 15px orange, 0 0 30px red;
+    opacity: 0;
+    pointer-events: none;
+    animation: streakPopup 1s ease-in-out forwards;
+    z-index: 2000;
+  }
+  
+  @keyframes streakPopup {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.3);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+    }
+  }
+  
+  
+  /* ❌ Wrong word: shake + flash */
+  .word.wrong {
+    animation: wrongShake 0.5s cubic-bezier(.36,.07,.19,.97),
+               wrongFlash 0.5s ease;
+  }
+  @keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px) rotate(-3deg); }
+    40% { transform: translateX(10px) rotate(3deg); }
+    60% { transform: translateX(-8px) rotate(-2deg); }
+    80% { transform: translateX(8px) rotate(2deg); }
+  }
+  @keyframes wrongFlash {
+    0%   { background: rgba(0,0,0,0.55); color: #fff; }
+    25%  { background: #ff1e56; color: #fff; box-shadow: 0 0 25px rgba(255,30,86,0.9); }
+    50%  { background: #ff4d6d; color: #fff; box-shadow: 0 0 30px rgba(255,77,109,1); }
+    75%  { background: #ff1e56; }
+    100% { background: rgba(0,0,0,0.55); }
+  }
+  
+  /* ⚡ Crack apart effect */
+  .word.cracked {
+    position: absolute;
+  }
+  .word.cracked span {
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  .word.cracked .left {
+    left: 0;
+    animation: crackFlyLeft 0.9s forwards;
+  }
+  .word.cracked .right {
+    right: 0;
+    animation: crackFlyRight 0.9s forwards;
+  }
+  @keyframes crackFlyLeft {
+    to { transform: translate(-36px,-18px) rotate(-18deg); opacity: 0; }
+  }
+  @keyframes crackFlyRight {
+    to { transform: translate(36px,-18px) rotate(18deg); opacity: 0; }
+  }
+  #menu-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: #ffcc00;
+    border: none;
+    border-radius: 8px;
+    z-index: 100;
+}
+
+/* CSS for the Modal Backdrop */
+#pause-modal {
+    display: none; /* Initially hidden, controlled by JS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Dark, transparent background */
+    z-index: 2000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CSS for the Modal Content Box */
+#pause-modal .modal-content {
+    background: #1f2937;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 179, 255, 0.5);
+    text-align: center;
+}
+#pause-modal h2 {
+    color: #00eaff;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+#pause-modal button {
+    display: block;
+    width: 250px;
+    padding: 12px;
+    margin: 15px auto;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#resume-btn {
+    background: #10b981; /* Green */
+    color: white;
+}
+#quit-to-levels-btn {
+    background: #ef4444; /* Red */
+    color: white;
+}

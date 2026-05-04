@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TypingRush - Modes</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="logout.css">
+  <script>
+    // Check if the page was loaded from the back/forward cache (BFCache)
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            console.log("Page loaded from cache. Forcing reload.");
+            // This forces the browser to fully re-execute the page and its scripts.
+            window.location.reload(); 
+        }
+    });
+  </script>
+  <script src="authCheck.js"></script>
+</head>
+
+<body class="bg-levels">
+  <!-- Gaming Menu -->
+<div class="menu-container">
+  <div class="menu-button">⋮</div>
+  <div class="menu-dropdown">
+    <a href="#" id="keypointsBtn">Game Keypoints</a>
+    <a id="logoutBtn">Logout</a>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="keypointsModal">
+  <div class="modal-content">
+    <h2>Game Keypoints</h2>
+    <ul>
+      <li>⚡ Type as fast as you can</li>
+      <li>🔥 Accuracy = Extra points</li>
+      <li>🏆 Beat the timer to win</li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+  <div class="background-letters">
+    <span style="left:10%">A</span>
+    <span style="left:25%">T</span>
+    <span style="left:40%">Y</span>
+    <span style="left:60%">P</span>
+    <span style="left:75%">E</span>
+    <span style="left:90%">X</span>
+</div>
+  <h1 class="brand">TypingRush</h1>
+  <div class="glass-card">
+    <h2>Choose Mode</h2>
+    <div class="modes">
+      <a href="mode.html?mode=single" class="mode-btn">Single Player</a>
+      <a href="wait.html" class="mode-btn">Multiplayer</a>
+    </div>
+  </div>
+
+  <script src="logout.js"></script>
+  <!-- <button class="mode-btn">Back</button> -->
+  <script src="script.js"></script>
+</body>
+</html>
