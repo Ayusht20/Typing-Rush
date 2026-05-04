@@ -18,12 +18,12 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-      origin: "https://your-frontend.vercel.app",
+      origin: "https://typing-rush-mu.vercel.app",
       methods: ["GET", "POST"]
     }
   });
 app.use(cors({
-    origin: "https://your-frontend.vercel.app",
+    origin: "https://typing-rush-mu.vercel.app",
     credentials: true
   }));
 
