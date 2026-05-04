@@ -5,7 +5,7 @@ import mysql from "mysql2/promise";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import fetch from "node-fetch";
-
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 // ---------------- Config ----------------
@@ -18,7 +18,9 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server
 );
-
+app.use(cors({
+    origin: "https://your-frontend.vercel.app"
+  }));
 app.use(express.static("../public"));
 app.use(express.json());
 
