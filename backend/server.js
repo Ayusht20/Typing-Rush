@@ -16,12 +16,17 @@ const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 // ---------------- Express & Socket.IO Setup ----------------
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server
-);
+const io = new Server(server, {
+    cors: {
+      origin: "https://your-frontend.vercel.app",
+      methods: ["GET", "POST"]
+    }
+  });
 app.use(cors({
-    origin: "https://your-frontend.vercel.app"
+    origin: "https://your-frontend.vercel.app",
+    credentials: true
   }));
-app.use(express.static("../public"));
+
 app.use(express.json());
 
 // ---------------- Database ----------------
