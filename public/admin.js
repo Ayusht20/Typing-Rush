@@ -278,6 +278,8 @@ function initialCheck() {
     window.location.replace("index.html"); 
 }
 
-
+window.showTab = showTab;
+window.loadReportData = loadReportData;
+window.switchReport = switchReport;
 document.getElementById('adminLogoutBtn').addEventListener('click', logout);
 document.addEventListener('DOMContentLoaded', initialCheck);
