@@ -151,7 +151,9 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ error: "Registration failed" });
   }
 });
-
+app.get("/", (req, res) => {
+    res.send("🚀 TypingRush API is running");
+  });
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
