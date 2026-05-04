@@ -31,12 +31,18 @@ app.use(express.json());
 
 // ---------------- Database ----------------
 const db = await mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: Number(process.env.DB_PORT),
+  ssl: { rejectUnauthorized: false }
+});
+
+  console.log("DB CONFIG:", {
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
     port: process.env.DB_PORT,
-  }); 
+  });
 
 // ---------------- Helpers & Middleware ----------------
 function tokenFromReq(req) {
