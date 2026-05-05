@@ -142,7 +142,7 @@ MySQL Database (Railway)
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/Ayusht20/typingrush.git
+git clone https://github.com/Ayusht20/Typing-Rush.git
 cd typingrush
 ```
 
