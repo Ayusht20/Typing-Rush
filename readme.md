@@ -44,6 +44,9 @@
 ### 🎮 Gameplay (Single Player)
 
 ![Gameplay](./screenshots/single_game.png)
+Here if the user hits the streaks on the multiple of 5..
+User's hearts gets increased upto 5 max❤️!
+After that score will be bonused..⭐
 
 ### ⏳ Waiting lobby
 ![Lobby](./screenshots/wait.png)
