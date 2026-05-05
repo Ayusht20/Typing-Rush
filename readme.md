@@ -62,6 +62,7 @@ After that score will be bonused..⭐
 ### 🧑‍💼 Admin Dashboard
 
 ![Admin](./screenshots/admin.png)
+![Admin](./screenshots/admin2.png)
 
 ---
 
