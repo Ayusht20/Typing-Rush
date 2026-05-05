@@ -23,7 +23,7 @@
 
 ## 🖼️ Screenshots
 
-> 📌 Create a folder named `screenshots` in your repo and add images with these names.
+📌 Create a folder named `screenshots` in your repo and add images with these names.
 
 ### 🔐 Login Page
 
