@@ -162,7 +162,7 @@ DB_PASS=yourpassword
 DB_NAME=typingrush
 DB_PORT=3306
 JWT_SECRET=your_secret
-
+```
 ---
 
 ## 🧪 API Endpoints
