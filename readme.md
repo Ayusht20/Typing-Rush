@@ -25,21 +25,32 @@
 
 📌 Create a folder named `screenshots` in your repo and add images with these names.
 
+### Dashboard
+
+![Dashboard!](./screenshots/dashboard.png)
+![Dashboard!](./screenshots/dashboard2.png)
+
 ### 🔐 Login Page
 
 ![Login](./screenshots/login.png)
 
-### 📝 Register Page
+### 🎮Game(Mode)
 
-![Register](./screenshots/register.png)
+![Mode](./screenshots/mode.png)
+### 🎮 Game (Difficulty options)
+
+![Settings](./screenshots/difficulty.png)
 
 ### 🎮 Gameplay (Single Player)
 
-![Gameplay](./screenshots/gameplay.png)
+![Gameplay](./screenshots/single_game.png)
+
+### ⏳ Waiting lobby
+![Lobby](./screenshots/wait.png)
 
 ### ⚔ Multiplayer Match
 
-![Multiplayer](./screenshots/multiplayer.png)
+![Multiplayer](./screenshots/multi_game.png)
 
 ### 🏆 Leaderboard
 
