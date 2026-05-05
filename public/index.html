@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Rush - Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
-    <script type="module">
-        import API_URL from "./config.js";
+    <script>
+        const API_URL = window.location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://typing-rush.onrender.com"; 
         (function() {
   // 1. Check if the authentication token exists in session storage.
   const token = sessionStorage.getItem("tr_token");
