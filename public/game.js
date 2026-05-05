@@ -1,7 +1,9 @@
 // single_player_game.js - Handles the game logic and saves scores to the server.
 
 // ===== API URL =====
-import API_URL from "./config.js";
+const API_URL = window.location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://typing-rush.onrender.com";
 
 // ===== Game Data and Topics (for word generation) =====
 const topics = [
