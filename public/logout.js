@@ -1,4 +1,6 @@
-import API_URL from "./config.js";
+const API_URL = window.location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://typing-rush.onrender.com";
 const keypointsBtn = document.getElementById("keypointsBtn");
 const keypointsModal = document.getElementById("keypointsModal");
 
