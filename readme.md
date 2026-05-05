@@ -45,7 +45,7 @@
 
 ![Gameplay](./screenshots/single_game.png)
 Here if the user hits the streaks on the multiple of 5..
-User's hearts gets increased upto 5 max❤️!
+User's hearts gets increased upto 5 max❤️!which are at first 3 hearts..❤️
 After that score will be bonused..⭐
 
 ### ⏳ Waiting lobby
