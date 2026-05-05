@@ -178,7 +178,7 @@ async function loadLeaderboard() {
         loadingMessage.textContent = "Network error: Could not connect to server.";
     }
 }
-
+window.loadLeaderboard=loadLeaderboard;
 // Initial event listeners and load call
 document.addEventListener('DOMContentLoaded', () => {
     // Initial load

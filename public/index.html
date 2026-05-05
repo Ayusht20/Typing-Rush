@@ -6,6 +6,7 @@
     <title>Typing Rush - Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
     <script>
+        import API_URL from "./config.js";
         (function() {
   // 1. Check if the authentication token exists in session storage.
   const token = sessionStorage.getItem("tr_token");
@@ -68,7 +69,7 @@
             leaderboardList.innerHTML = '<li>Loading top scores...</li>'; // Set loading message
 
             // Default settings for dashboard preview: Single Player, Easy, sorted by Score
-            const url = `http://localhost:3000/get_leaderboard?type=single&level=easy&orderBy=score`;
+            const url = `${API_URL}/get_leaderboard?type=single&level=easy&orderBy=score`;
 
             try {
                 // Since the server endpoint is now public, we don't need an Authorization header.
@@ -145,9 +146,10 @@
     <section class="leaderboard-preview">
         <h2>🏆 Top Players (Easy Mode)</h2>
         <ul id="topPlayersList">
+
             </ul>
         <a href="leaderboard.html" class="view-btn">View Full Leaderboard</a>
     </section>
-
+    
 </body>
 </html>
