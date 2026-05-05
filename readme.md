@@ -1,7 +1,8 @@
 # 🚀 TypingRush — Real-Time Multiplayer Typing Game
 
-> A full-stack real-time typing game with multiplayer battles, leaderboard analytics, and admin reporting system.
+> Compete in real-time typing battles with live opponents, track performance with analytics, and manage users through a full admin dashboard.
 
+🔥 Built with WebSockets, JWT Auth, and scalable backend architecture.
 ---
 
 ## 🌐 Live Demo
@@ -95,9 +96,16 @@ Backend API + WebSockets (Render)
         ↓
 MySQL Database (Railway)
 ```
-
 ---
+## ⚡ Multiplayer Flow
 
+1. User sends invite via socket event
+2. Opponent accepts → room created
+3. Both users join same socket room
+4. Typing progress synced in real-time
+5. First to finish triggers matchEnd event
+6. Results stored in database
+---
 ## 🔥 Features
 
 ### 👤 Authentication
